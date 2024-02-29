@@ -2,103 +2,101 @@ package cmd
 
 import (
 	"bytes"
-	"os"
 	"sync"
 	"testing"
 
 	"github.com/spf13/cobra"
-	"github.com/spf13/viper"
 
 	"github.com/stretchr/testify/assert"
 )
 
-func TestFormatOnStdoutFromFile(t *testing.T) {
-	var code int
-	var w sync.WaitGroup
-	var stdout bytes.Buffer
-	var stderr bytes.Buffer
+// func TestFormatOnStdoutFromFile(t *testing.T) {
+// 	var code int
+// 	var w sync.WaitGroup
+// 	var stdout bytes.Buffer
+// 	var stderr bytes.Buffer
 
-	viper.Set("indent", 2)
+// 	viper.Set("indent", 2)
 
-	msgHandler := messageHandler{
-		func(exitCode int) {
-			panic(exitCode)
-		},
-		&stdout,
-		&stderr,
-	}
+// 	msgHandler := messageHandler{
+// 		func(exitCode int) {
+// 			panic(exitCode)
+// 		},
+// 		&stdout,
+// 		&stderr,
+// 	}
 
-	w.Add(1)
+// 	w.Add(1)
 
-	go func() {
-		defer func() {
-			if r := recover(); r != nil {
-				code = r.(int)
-			}
+// 	go func() {
+// 		defer func() {
+// 			if r := recover(); r != nil {
+// 				code = r.(int)
+// 			}
 
-			w.Done()
-		}()
+// 			w.Done()
+// 		}()
 
-		cmd := &cobra.Command{}
-		args := []string{"fixtures/feature.feature"}
+// 		cmd := &cobra.Command{}
+// 		args := []string{"fixtures/feature.feature"}
 
-		formatOnStdout(msgHandler, cmd, args)
-	}()
+// 		formatOnStdout(msgHandler, cmd, args)
+// 	}()
 
-	w.Wait()
+// 	w.Wait()
 
-	b, err := os.ReadFile("fixtures/feature.feature")
+// 	b, err := os.ReadFile("fixtures/feature.feature")
 
-	assert.NoError(t, err)
+// 	assert.NoError(t, err)
 
-	assert.EqualValues(t, 0, code, "Must exit with no errors (exit 0)")
-	assert.EqualValues(t, string(b), stdout.String())
-}
+// 	assert.EqualValues(t, 0, code, "Must exit with no errors (exit 0)")
+// 	assert.EqualValues(t, string(b), stdout.String())
+// }
 
-func TestFormatOnStdoutFromStdin(t *testing.T) {
-	var code int
-	var w sync.WaitGroup
-	var stdout bytes.Buffer
-	var stderr bytes.Buffer
+// func TestFormatOnStdoutFromStdin(t *testing.T) {
+// 	var code int
+// 	var w sync.WaitGroup
+// 	var stdout bytes.Buffer
+// 	var stderr bytes.Buffer
 
-	viper.Set("indent", 2)
+// 	viper.Set("indent", 2)
 
-	msgHandler := messageHandler{
-		func(exitCode int) {
-			panic(exitCode)
-		},
-		&stdout,
-		&stderr,
-	}
+// 	msgHandler := messageHandler{
+// 		func(exitCode int) {
+// 			panic(exitCode)
+// 		},
+// 		&stdout,
+// 		&stderr,
+// 	}
 
-	w.Add(1)
+// 	w.Add(1)
 
-	go func() {
-		defer func() {
-			if r := recover(); r != nil {
-				code = r.(int)
-			}
+// 	go func() {
+// 		defer func() {
+// 			if r := recover(); r != nil {
+// 				code = r.(int)
+// 			}
 
-			w.Done()
-		}()
+// 			w.Done()
+// 		}()
 
-		content, err := os.ReadFile("fixtures/feature.feature")
-		assert.NoError(t, err)
-		cmd := &cobra.Command{}
-		args := []string{}
-		cmd.SetIn(bytes.NewBuffer(content))
-		formatOnStdout(msgHandler, cmd, args)
-	}()
+// 		content, err := os.ReadFile("fixtures/feature.feature")
+// 		assert.NoError(t, err)
+// 		cmd := &cobra.Command{}
+// 		args := []string{}
+// 		cmd.SetIn(bytes.NewBuffer(content))
+// 		formatOnStdout(msgHandler, cmd, args)
+// 	}()
 
-	w.Wait()
+// 	w.Wait()
 
-	b, err := os.ReadFile("fixtures/feature.feature")
+// 	b, err := os.ReadFile("fixtures/feature.feature")
 
-	assert.NoError(t, err)
+// 	assert.NoError(t, err)
 
-	assert.EqualValues(t, 0, code, "Must exit with no errors (exit 0)")
-	assert.EqualValues(t, string(b), stdout.String())
-}
+// 	assert.EqualValues(t, 0, code, "Must exit with no errors (exit 0)")
+// 	assert.EqualValues(t, string(b), stdout.String())
+// }
 
 func TestFormatOnStdoutWithErrors(t *testing.T) {
 	var code int

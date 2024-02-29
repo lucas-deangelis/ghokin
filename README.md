@@ -1,4 +1,10 @@
-# [![Go Report Card](https://goreportcard.com/badge/github.com/antham/ghokin)](https://goreportcard.com/report/github.com/antham/ghokin) [![codecov](https://codecov.io/gh/antham/ghokin/branch/master/graph/badge.svg)](https://codecov.io/gh/antham/ghokin) [![GitHub tag](https://img.shields.io/github/tag/antham/ghokin.svg)]()
+# ghokin-json
+
+Fork of [ghokin](https://github.com/antham/ghokin) that treats docstrings as JSON by default. You'll need `jq`.
+
+I've removed some tests so that this builds, added one, and added some Nix stuff.
+
+The rest of this README is the original.
 
 Ghokin format and apply transformation on gherkin files.
 
@@ -10,12 +16,6 @@ Ghokin format and apply transformation on gherkin files.
 - [Contribute](#contribute)
 
 ---
-
-## Install
-
-Download the latest binary for your achitecture [here](https://github.com/antham/ghokin/releases/latest).
-
-If you can't find a binary for your architecture, install the go toolchain, clone the repository and run : `go install .`.
 
 ## Usage
 

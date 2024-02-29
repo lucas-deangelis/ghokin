@@ -9,7 +9,7 @@ import (
 	"strings"
 	"unicode/utf8"
 
-	"github.com/cucumber/gherkin/go/v26"
+	gherkin "github.com/cucumber/gherkin/go/v26"
 )
 
 // CmdErr is thrown when an error occurred when calling
@@ -65,6 +65,8 @@ func transform(section *section, indent int, aliases aliases) ([]byte, error) {
 	document := []string{}
 	optionalRulePadding := 0
 
+	ignoreNextDocString := false
+
 	for sec := section; sec != nil; sec = sec.nex {
 		if sec.kind == 0 {
 			continue
@@ -84,6 +86,13 @@ func transform(section *section, indent int, aliases aliases) ([]byte, error) {
 			padding = getTagOrCommentPadding(paddings, indent, sec)
 		case gherkin.TokenTypeDocStringSeparator:
 			lines = extractKeyword(sec.values)
+			// When we encounter a docstring, we set jq. But we don't
+			// want to do this at the end of a docstring too, as commands are applied
+			// to the next non comment/docstring.
+			if !ignoreNextDocString {
+				cmd = exec.Command("sh", "-c", "jq .")
+			}
+			ignoreNextDocString = !ignoreNextDocString
 		case gherkin.TokenTypeOther:
 			if isDescriptionFeature(sec) {
 				lines = trimLinesSpace(lines)
