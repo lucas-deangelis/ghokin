@@ -8,7 +8,6 @@ import (
 	"strconv"
 	"strings"
 	"unicode/utf8"
-
 	gherkin "github.com/cucumber/gherkin/go/v26"
 )
 

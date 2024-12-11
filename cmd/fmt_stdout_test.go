@@ -4,9 +4,7 @@ import (
 	"bytes"
 	"sync"
 	"testing"
-
 	"github.com/spf13/cobra"
-
 	"github.com/stretchr/testify/assert"
 )
 

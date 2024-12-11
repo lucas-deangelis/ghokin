@@ -8,7 +8,6 @@ import (
 	mpath "path"
 	"path/filepath"
 	"sync"
-
 	"github.com/antham/ghokin/v3/ghokin/internal/transformer"
 	"github.com/saintfish/chardet"
 	"golang.org/x/net/html/charset"

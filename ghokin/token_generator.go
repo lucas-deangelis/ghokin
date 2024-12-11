@@ -2,7 +2,6 @@ package ghokin
 
 import (
 	"errors"
-
 	gherkin "github.com/cucumber/gherkin/go/v26"
 )
 

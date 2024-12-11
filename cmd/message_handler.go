@@ -5,7 +5,6 @@ import (
 	"io"
 	"log"
 	"os"
-
 	"github.com/fatih/color"
 )
 

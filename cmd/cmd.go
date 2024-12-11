@@ -2,7 +2,6 @@ package cmd
 
 import (
 	"github.com/antham/ghokin/v3/ghokin"
-
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )

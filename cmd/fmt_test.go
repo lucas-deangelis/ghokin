@@ -3,9 +3,7 @@ package cmd
 import (
 	"bytes"
 	"testing"
-
 	"github.com/spf13/cobra"
-
 	"github.com/stretchr/testify/assert"
 )
 
